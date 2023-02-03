@@ -12,10 +12,29 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeViewModel>(
       create: (context) => HomeViewModel(SpotEndpoint(GetIt.I.get<Dio>())),
-      builder: (_, __) => const Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Text('Home screen'),
+      builder: (_, __) => Scaffold(
+        appBar: AppBar(
+          title: const Text("Liste de lieux"),
+        ),
+        body: Consumer<HomeViewModel>(builder: (context, viewModel, child) =>
+          SafeArea(
+            child: ListView.builder(
+              itemCount: viewModel.spots.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    leading: Image.network(
+                      viewModel.spots[index].imageThumbnail ?? "",
+                      height: 60,
+                      width: 50,
+                    ),
+                    title: Text(viewModel.spots[index].title ?? ""),
+                    subtitle: Text(viewModel.spots[index].mainCategory?.name ?? ""),
+                    trailing: const Icon(Icons.arrow_forward_ios_rounded),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
