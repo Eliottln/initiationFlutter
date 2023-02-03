@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:spots_discovery/data/endpoint/spot_endpoint.dart';
 import 'package:spots_discovery/infrastructure/viewmodel/home_viewmodel.dart';
+import 'package:spots_discovery/ui/details.dart';
+import '../data/model/spot.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,8 +18,8 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Liste de lieux"),
         ),
-        body: Consumer<HomeViewModel>(builder: (context, viewModel, child) =>
-          SafeArea(
+        body: Consumer<HomeViewModel>(
+          builder: (context, viewModel, child) => SafeArea(
             child: ListView.builder(
               itemCount: viewModel.spots.length,
               itemBuilder: (context, index) {
@@ -27,10 +29,23 @@ class HomeScreen extends StatelessWidget {
                       viewModel.spots[index].imageThumbnail ?? "",
                       height: 60,
                       width: 50,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Icon(Icons.no_photography),
                     ),
                     title: Text(viewModel.spots[index].title ?? ""),
-                    subtitle: Text(viewModel.spots[index].mainCategory?.name ?? ""),
+                    subtitle:
+                        Text(viewModel.spots[index].mainCategory?.name ?? ""),
                     trailing: const Icon(Icons.arrow_forward_ios_rounded),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            spotId: 1,
+                          )
+                        ),
+                      );
+                    },
                   ),
                 );
               },
