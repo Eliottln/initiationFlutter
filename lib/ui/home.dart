@@ -40,8 +40,8 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DetailsScreen(
-                            spotId: 1,
+                          builder: (context) => DetailsScreen(
+                            spotName: viewModel.spots[index].title,
                           )
                         ),
                       );

@@ -6,8 +6,8 @@ import 'package:spots_discovery/data/endpoint/spot_endpoint.dart';
 import 'package:spots_discovery/infrastructure/viewmodel/home_viewmodel.dart';
 
 class DetailsScreen extends StatelessWidget {
-  final spotId;
-  const DetailsScreen({super.key, this.spotId});
+  final spotName;
+  const DetailsScreen({super.key, this.spotName});
 
   @override
   Widget build(BuildContext context) {
