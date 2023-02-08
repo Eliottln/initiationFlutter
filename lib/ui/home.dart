@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:spots_discovery/data/endpoint/spot_endpoint.dart';
 import 'package:spots_discovery/infrastructure/viewmodel/home_viewmodel.dart';
 import 'package:spots_discovery/ui/details.dart';
-import '../data/model/spot.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -37,14 +36,7 @@ class HomeScreen extends StatelessWidget {
                         Text(viewModel.spots[index].mainCategory?.name ?? ""),
                     trailing: const Icon(Icons.arrow_forward_ios_rounded),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsScreen(
-                            spotName: viewModel.spots[index].title,
-                          )
-                        ),
-                      );
+                      viewModel.navigateToDetail(context, index);
                     },
                   ),
                 );

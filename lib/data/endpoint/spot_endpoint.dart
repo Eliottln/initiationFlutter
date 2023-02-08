@@ -11,4 +11,7 @@ abstract class SpotEndpoint {
 
   @GET("/spots.json")
   Future<ResponseDto> getSpots();
+
+  @GET("/spot-details/{id}.json")
+  Future<Spot> getSpotById(@Path("id") int id);
 }
